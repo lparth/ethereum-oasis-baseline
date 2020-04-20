@@ -10,17 +10,39 @@ const main = async () => {
     // Setup
     await db.connect();
     await db.connectMongoose();
-    await loadServerSettingsFromFile();
 
+    try {
+      await loadServerSettingsFromFile();
+    } catch (err) {
+      console.log('caught exception during loadServerSettingsFromFile()');
+      console.log(err);
+    }
+  
     // Healthcheck
     startServer();
 
     // Sanity Check
-    await saveOrganizations();
-    await subscribeRegisterOrgEvent();
+    try {
+      await saveOrganizations();
+    } catch (err) {
+      console.log('caught exception during saveOrganizations()');
+      console.log(err);
+    }
 
-    // filter for NewLeaves in the shield contract:
-    await startEventFilter();
+    try {
+      await subscribeRegisterOrgEvent();
+    } catch (err) {
+      console.log('caught exception during subscribeRegisterOrgEvent()');
+      console.log(err);
+    }
+
+    try {
+      // filter for NewLeaves in the shield contract:
+      await startEventFilter();
+    } catch (err) {
+      console.log('caught exception during startEventFilter()');
+      console.log(err);
+    }
   } catch (err) {
     console.log(err);
   }

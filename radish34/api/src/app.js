@@ -90,7 +90,8 @@ export default async function startServer() {
   app.listen(REST_PORT, () =>
     console.log(`🚀 Internal REST-Express server listening at http://localhost:${REST_PORT}`),
   );
-  await healthcheck();
+
+  // FIXME -- await healthcheck();
 
   const server = new ApolloServer({
     typeDefs: [coreQuery, ...typeDefs],
