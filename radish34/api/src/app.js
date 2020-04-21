@@ -5,6 +5,7 @@ import { UI } from 'bull-board';
 import bodyParser from 'body-parser';
 import axios from 'axios';
 import coreQuery from './schemas/core';
+import main from '../node_modules/radish34-messenger-service/src/index';
 import OrganizationSchema from './schemas/organization';
 import OrganizationResolver from './resolvers/organization';
 import ScalarsSchema from './schemas/scalars';
@@ -115,4 +116,7 @@ export default async function startServer() {
       `🚀 Subscriptions ready at ws://localhost:${GRAPHQL_PORT}${server.subscriptionsPath}`,
     );
   });
+
+  // messenger
+  main();
 }

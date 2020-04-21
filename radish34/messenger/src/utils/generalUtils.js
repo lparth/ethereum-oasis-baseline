@@ -3,7 +3,7 @@ const logger = require('winston');
 require('../logger');
 const Identity = require('../db/models/Identity');
 const Message = require('../db/models/Message');
-const { receiveMessageQueue } = require('../queues/receiveMessage/');
+const { receiveMessageQueue } = require('../queues/receiveMessage');
 
 const {
   DEFAULT_TOPIC,

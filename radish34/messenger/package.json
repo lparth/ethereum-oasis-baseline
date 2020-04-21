@@ -1,6 +1,6 @@
 {
   "name": "radish34-messenger-service",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "REST Based API microservice for sending and receiving structured JSON messages delivered via Whisper",
   "contributors": [
     "Brian Chamberlain <breakpointer>",

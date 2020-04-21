@@ -3,14 +3,15 @@ const logger = require('winston');
 const { setQueues } = require('bull-board');
 const Config = require('../../../config');
 
+const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 const requestNamespace = `baseline:messenger:receiveMessage:req`;
 let receiveMessageQueue;
 
 try {
-  receiveMessageQueue = new Queue(requestNamespace, Config.users[0].redisUrl);
-  logger.debug(`SUCCESS: connected to bull queue "${requestNamespace}" at ${Config.users[0].redisUrl}`);
+  receiveMessageQueue = new Queue(requestNamespace, redisUrl);
+  logger.debug(`SUCCESS: connected to bull queue "${requestNamespace}" at ${redisUrl}`);
 } catch (error) {
-  logger.error(`ERROR: could not connect to bull queue "${requestNamespace}" at ${Config.users[0].redisUrl}`);
+  logger.error(`ERROR: could not connect to bull queue "${requestNamespace}" at ${redisUrl}`);
 }
 
 // Adding Queue to BullBoard Admin UI
