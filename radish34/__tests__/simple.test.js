@@ -43,6 +43,7 @@ afterAll(async () => {
 
 describe('Check that containers are ready', () => {
     describe('Sender containers', () => {
+<<<<<<< HEAD
       test('Sender messenger GET /health-check returns 200', async () => {
         const res = await request(senderMessengerURL).get('/api/v1/health-check');
         expect(res.statusCode).toEqual(200);
@@ -50,11 +51,21 @@ describe('Check that containers are ready', () => {
   
       test('Sender radish-api REST server GET /health-check returns 200', async () => {
         const res = await request(senderApiURL).get('/api/v1/health-check');
+=======
+      test('Sender messenger GET /health returns 200', async () => {
+        const res = await request(senderMessengerURL).get('/api/v1/health');
+        expect(res.statusCode).toEqual(200);
+      });
+  
+      test('Sender radish-api REST server GET /health returns 200', async () => {
+        const res = await request(senderApiURL).get('/health');
+>>>>>>> simplify-msa-process-merge-messaging-rebased
         expect(res.statusCode).toEqual(200);
       });
     });
   
     describe('Recipient containers', () => {
+<<<<<<< HEAD
       test('Recipient messenger GET /health-check returns 200', async () => {
         const res = await request(recipientMessengerURL).get('/api/v1/health-check');
         expect(res.statusCode).toEqual(200);
@@ -62,6 +73,15 @@ describe('Check that containers are ready', () => {
   
       test('Recipient radish-api REST server GET /health-check returns 200', async () => {
         const res = await request(recipientApiURL).get('/api/v1/health-check');
+=======
+      test('Recipient messenger GET /health returns 200', async () => {
+        const res = await request(recipientMessengerURL).get('/api/v1/health');
+        expect(res.statusCode).toEqual(200);
+      });
+  
+      test('Recipient radish-api REST server GET /health returns 200', async () => {
+        const res = await request(recipientApiURL).get('/health');
+>>>>>>> simplify-msa-process-merge-messaging-rebased
         expect(res.statusCode).toEqual(200);
       });
     });
@@ -72,8 +92,13 @@ describe('Sender creates Agreement, signs it, sends to recipient, recipient resp
     const recipient = getOrgSettings('supplier1');
     const recipientAddress = recipient.address;
     const recipientAddressPadded = `0x000000000000000000000000${recipientAddress.substring(2)}`;
+<<<<<<< HEAD
     const name = 'CO-1234';
     const prevId = 'CO-1233';
+=======
+    const name = `CO-${ Math.floor(1000 + Math.random() * 10000)}`;
+    const prevId = `CO-${ Math.floor(1000 + Math.random() * 10000)}`;
+>>>>>>> simplify-msa-process-merge-messaging-rebased
     const namePadded = '0x000000000000000000434f2d31323334';
     const erc20ContractAddress = '0xcd234a471b72ba2f1ccf0a70fcaba648a5eecd8d';
     const erc20ContractAddressPadded = '0x000000000000000000000000cd234a471b72ba2f1ccf0a70fcaba648a5eecd8d';
@@ -120,7 +145,11 @@ describe('Sender creates Agreement, signs it, sends to recipient, recipient resp
         expect(res.statusCode).toEqual(200);
         expect(res.body.data.createAgreement.zkpPublicKeyOfSender).toEqual(senderZkpPublicKey);
         expect(res.body.data.createAgreement.zkpPublicKeyOfRecipient).toEqual(recipientZkpPublicKey);
+<<<<<<< HEAD
         expect(res.body.data.createAgreement.name).toEqual('CO-1234');
+=======
+        expect(res.body.data.createAgreement.name).toEqual(name);
+>>>>>>> simplify-msa-process-merge-messaging-rebased
         expect(res.body.data.createAgreement._id).not.toBeNull();
         /* expect(res.body.data.createAgreement.commitments[0].commitment).toEqual(concatenateThenHash(
           senderZkpPublicKey,
